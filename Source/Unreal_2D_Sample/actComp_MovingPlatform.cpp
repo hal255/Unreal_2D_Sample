@@ -33,11 +33,4 @@ void UactComp_MovingPlatform::TickComponent(float DeltaTime, ELevelTick TickType
 		newLocation.Z += 0.1f;
 		parent->SetActorLocation(newLocation);
 	}
-	float f = FPlatformTime::Seconds();
-	FString TheFloatStr = FString::SanitizeFloat(f);
-
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Cyan, TheFloatStr);
-	}
 }
