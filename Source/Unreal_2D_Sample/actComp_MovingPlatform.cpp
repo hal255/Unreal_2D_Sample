@@ -12,22 +12,32 @@ UactComp_MovingPlatform::UactComp_MovingPlatform()
 	// ...
 }
 
-
 // Called when the game starts
 void UactComp_MovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 
 	// ...
-	
 }
 
-
 // Called every frame
-void UactComp_MovingPlatform::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UactComp_MovingPlatform::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
-}
+	AActor* parent = GetOwner();
+	if (parent)
+	{
+		FVector newLocation = parent->GetActorLocation();
+		newLocation.Z += 0.1f;
+		parent->SetActorLocation(newLocation);
+	}
+	float f = FPlatformTime::Seconds();
+	FString TheFloatStr = FString::SanitizeFloat(f);
 
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Cyan, TheFloatStr);
+	}
+}
